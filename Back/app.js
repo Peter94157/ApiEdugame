@@ -87,11 +87,11 @@ app.post('/insert',async(req,res)=>{
 
 
 async function seedCategories(){
-    await Category.deleteMany()
     const categories = Object.entries(categoryQuestions).map(([name,questions])=>({
         name,
         questions
     }))
+    await Category.deleteMany()
     await Category.insertMany(categories);
     
     console.log(categoryQuestions)
