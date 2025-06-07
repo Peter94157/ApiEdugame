@@ -107,6 +107,14 @@ app.get("/", (req, res) => {
     res.send("API EduGame funcionando 🚀");
 });
 
+app.get('/categories', async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.send(categories);
+  } catch (error) {
+    res.status(500).send({ message: 'Erro ao buscar categorias' });
+  }
+});
 
 
 
