@@ -53,7 +53,7 @@ const categoryQuestions = {
 app.get('/category/:name', async (req, res) => {
     try {
         const { name } = req.params;
-        console.log(name);
+        console.log('Buscando categoria:', name);
 
         const category = await Category.findOne({ name: new RegExp(`^${name}$`, 'i') });
 
