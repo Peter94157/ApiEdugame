@@ -69,7 +69,7 @@ app.get('/category/:name',async(req,res)=>{
 })
 
 app.listen(port,async()=>{
-    mongoose.connect('mongodb+srv://pedroleonardo2001:LRqDb2hdeyQ4jpGt@duo.9k1o8hq.mongodb.net/?retryWrites=true&w=majority&appName=Duo');
+    mongoose.connect(process.env.MONGO_URL);
 
     console.log("Funiçando")
 })
