@@ -2,7 +2,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const app = express();
-const port = 5500
+const port = process.env.PORT||5500
 const Category = require('./Models/Category')
 app.use(express.json());
 
