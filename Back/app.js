@@ -55,7 +55,7 @@ app.get('/category/:name', async (req, res) => {
         const { name } = req.params;
         console.log(name);
 
-        const category = await Category.findOne({ name });
+        const category = await Category.findOne({ name: new RegExp(`^${name}$`, 'i') });
 
         if (!category) {
             return res.status(404).send({ message: "Categoria não encontrada" });
@@ -68,12 +68,15 @@ app.get('/category/:name', async (req, res) => {
     }
 })
 
-app.listen(port, async () => {
-    mongoose.connect(process.env.MONGO_URL)
-        .then(() => console.log("MongoDB conectado com sucesso"))
-        .catch((err) => console.error("Erro ao conectar no MongoDB:", err));
-    console.log("Funiçando")
-})
+
+mongoose.connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("MongoDB conectado com sucesso");
+    app.listen(port, () => {
+      console.log(`Servidor rodando na porta ${port}`);
+    });
+  })
+  .catch((err) => console.error("Erro ao conectar no MongoDB:", err));
 
 
 app.post('/insert', async (req, res) => {
